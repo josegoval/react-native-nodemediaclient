@@ -5,13 +5,16 @@
 //  Copyright © 2017年 NodeMedia. All rights reserved.
 //
 
-import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
-import { requireNativeComponent, View, UIManager, findNodeHandle } from 'react-native';
+import React, { Component } from "react";
+import { PropTypes } from "prop-types";
+import {
+  requireNativeComponent,
+  View,
+  UIManager,
+  findNodeHandle,
+} from "react-native";
 
-
-
-var RCT_VIDEO_REF = 'NodeCameraView';
+var RCT_VIDEO_REF = "NodeCameraView";
 
 class NodeCameraView extends Component {
   constructor(props) {
@@ -27,7 +30,7 @@ class NodeCameraView extends Component {
   switchCamera() {
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this.refs[RCT_VIDEO_REF]),
-      UIManager.getViewManagerConfig('RCTNodeCamera').Commands.switchCamera,
+      UIManager.getViewManagerConfig("RCTNodeCamera").Commands.switchCamera,
       null
     );
   }
@@ -35,7 +38,7 @@ class NodeCameraView extends Component {
   flashEnable(enable) {
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this.refs[RCT_VIDEO_REF]),
-      UIManager.getViewManagerConfig('RCTNodeCamera').Commands.flashEnable,
+      UIManager.getViewManagerConfig("RCTNodeCamera").Commands.flashEnable,
       [enable]
     );
   }
@@ -43,7 +46,7 @@ class NodeCameraView extends Component {
   startPreview() {
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this.refs[RCT_VIDEO_REF]),
-      UIManager.getViewManagerConfig('RCTNodeCamera').Commands.startprev,
+      UIManager.getViewManagerConfig("RCTNodeCamera").Commands.startprev,
       null
     );
   }
@@ -51,7 +54,7 @@ class NodeCameraView extends Component {
   stopPreview() {
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this.refs[RCT_VIDEO_REF]),
-      UIManager.getViewManagerConfig('RCTNodeCamera').Commands.stopprev,
+      UIManager.getViewManagerConfig("RCTNodeCamera").Commands.stopprev,
       null
     );
   }
@@ -59,7 +62,7 @@ class NodeCameraView extends Component {
   start() {
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this.refs[RCT_VIDEO_REF]),
-      UIManager.getViewManagerConfig('RCTNodeCamera').Commands.start,
+      UIManager.getViewManagerConfig("RCTNodeCamera").Commands.start,
       null
     );
   }
@@ -67,18 +70,20 @@ class NodeCameraView extends Component {
   stop() {
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this.refs[RCT_VIDEO_REF]),
-      UIManager.getViewManagerConfig('RCTNodeCamera').Commands.stop,
+      UIManager.getViewManagerConfig("RCTNodeCamera").Commands.stop,
       null
     );
   }
 
   render() {
-    return <RCTNodeCamera
-      {...this.props}
-      ref={RCT_VIDEO_REF}
-      onChange={this._onChange.bind(this)}
-    />;
-  };
+    return (
+      <RCTNodeCamera
+        {...this.props}
+        ref={RCT_VIDEO_REF}
+        onChange={this._onChange.bind(this)}
+      />
+    );
+  }
 }
 
 NodeCameraView.name = RCT_VIDEO_REF;
@@ -86,7 +91,7 @@ NodeCameraView.propTypes = {
   outputUrl: PropTypes.string,
   camera: PropTypes.shape({
     cameraId: PropTypes.oneOf([0, 1]),
-    cameraFrontMirror: PropTypes.bool
+    cameraFrontMirror: PropTypes.bool,
   }),
   audio: PropTypes.shape({
     bitrate: PropTypes.number,
@@ -98,19 +103,20 @@ NodeCameraView.propTypes = {
     bitrate: PropTypes.number,
     profile: PropTypes.oneOf([0, 1, 2]),
     fps: PropTypes.oneOf([15, 20, 24, 30]),
-    videoFrontMirror: PropTypes.bool
+    videoFrontMirror: PropTypes.bool,
   }),
-  autopreview:PropTypes.bool,
+  autopreview: PropTypes.bool,
   denoise: PropTypes.bool,
   dynamicRateEnable: PropTypes.bool,
   smoothSkinLevel: PropTypes.oneOf([0, 1, 2, 3, 4, 5]),
-  cryptoKey:PropTypes.string,
+  zoomScale: PropTypes.number, // from 0 to 1
+  cryptoKey: PropTypes.string,
   onStatus: PropTypes.func,
-  ...View.propTypes // 包含默认的View的属性
+  ...View.propTypes, // 包含默认的View的属性
 };
 
-const RCTNodeCamera = requireNativeComponent('RCTNodeCamera', NodeCameraView, {
-  nativeOnly: { onChange: true }
+const RCTNodeCamera = requireNativeComponent("RCTNodeCamera", NodeCameraView, {
+  nativeOnly: { onChange: true },
 });
 
 module.exports = NodeCameraView;

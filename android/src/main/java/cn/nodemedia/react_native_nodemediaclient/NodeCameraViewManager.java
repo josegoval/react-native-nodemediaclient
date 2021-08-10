@@ -103,6 +103,11 @@ public class NodeCameraViewManager extends ViewGroupManager<RCTNodeCameraView> {
         view.setSmoothSkinLevel(level);
     }
 
+    @ReactProp(name = "zoomScale")
+    public void setZoomScale(RCTNodeCameraView view, float scale) {
+        view.setZoomScale(scale);
+    }
+
     @ReactProp(name = "cryptoKey")
     public void setCryptoKey(RCTNodeCameraView view, @Nullable String cryptoKey) {
         view.setCryptoKey(cryptoKey);
