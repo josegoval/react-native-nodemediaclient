@@ -44,6 +44,7 @@ public class RCTNodeCameraView extends NodeCameraView implements LifecycleEventL
     private boolean denoise = false;
     private boolean dynamicRateEnable = true;
     private int smoothSkinLevel = 0;
+    private float zoomScale = 0;
 
 
     public RCTNodeCameraView(@NonNull ThemedReactContext context) {
@@ -104,6 +105,11 @@ public class RCTNodeCameraView extends NodeCameraView implements LifecycleEventL
 
     public void setSmoothSkinLevel(int smoothSkinLevel) {
         this.smoothSkinLevel = smoothSkinLevel;
+    }
+
+    public void setZoomScale(float scale) {
+        mNodePublisher.setZoom(scale);
+        this.zoomScale = scale;
     }
 
     public int startPrev() {
